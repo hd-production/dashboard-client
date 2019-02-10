@@ -5,18 +5,18 @@
         Log in
       </mat-card-title>
       <mat-card-content>
-        <form>
+        <form [formGroup]="loginForm">
           <mat-form-field class="full-width">
-            <input matInput type="text" placeholder="Email">
+            <input matInput type="text" placeholder="Email" formControlName="email">
           </mat-form-field>
           <mat-form-field class="full-width">
-            <input matInput type="password" placeholder="Password">
+            <input matInput type="password" placeholder="Password" formControlName="password">
           </mat-form-field>
         </form>
       </mat-card-content>
       <mat-card-actions>
         <div class="horizontal-container align-right">
-          <button mat-raised-button color="primary">Send</button>
+          <button mat-raised-button color="primary" (click)="submit()">Submit</button>
         </div>
       </mat-card-actions>
     </mat-card>
