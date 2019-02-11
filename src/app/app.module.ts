@@ -7,7 +7,8 @@ import {AppRoutingModule} from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {UserService} from './services/user.service';
 import {StorageService} from './services/storage.service';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {AuthInterceptor} from './services/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,12 @@ import {HttpClientModule} from '@angular/common/http';
   providers: [
     AuthGuardService,
     UserService,
-    StorageService
+    StorageService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

@@ -8,7 +8,7 @@ import {environment} from '../../environments/environment';
 import {switchMap} from 'rxjs/operators';
 import {StorageService} from '../services/storage.service';
 import {LoginResponse} from './models/login-response';
-import {empty} from 'rxjs/internal/observable/empty';
+import {of} from 'rxjs';
 
 const USERS_URL = `${environment.api.getUrl()}/users`;
 const SESSIONS_URL = `${environment.api.getUrl()}/sessions`;
@@ -21,13 +21,13 @@ export class AuthService {
     private storageService: StorageService
   ) {}
 
-  public login(loginForm: LoginForm): Observable<string> {
+  public login(loginForm: LoginForm): Observable<object> {
     const loginData = this.hashPassword(loginForm);
     return this.http.post(SESSIONS_URL, loginData).pipe(
       switchMap((res: LoginResponse) => {
         this.storageService.store('token', res.token);
         this.storageService.store('refreshToken', res.refreshToken);
-        return empty();
+        return of({});
       })
     );
   }
