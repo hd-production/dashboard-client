@@ -37,10 +37,6 @@ export class AuthService {
     return this.http.post(USERS_URL, loginData);
   }
 
-  public logout(): void {
-
-  }
-
   private hashPassword(form: LoginForm | RegisterForm) {
     return {
       ...form,
