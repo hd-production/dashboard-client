@@ -1,17 +1,19 @@
 import {Injectable} from '@angular/core';
-import {LoginForm} from './models/login-form';
-import {RegisterForm} from './models/register-form';
+import {LoginForm} from '../auth/models/login-form';
+import {RegisterForm} from '../auth/models/register-form';
 import {Md5} from 'ts-md5';
 import {Observable} from 'rxjs/internal/Observable';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {switchMap} from 'rxjs/operators';
-import {StorageService} from '../services/storage.service';
-import {LoginResponse} from './models/login-response';
+import {StorageService} from './storage.service';
+import {LoginResponse} from '../auth/models/login-response';
 import {of} from 'rxjs';
+import * as jwtDecode from 'jwt-decode';
 
 const USERS_URL = `${environment.api.getUrl()}/users`;
 const SESSIONS_URL = `${environment.api.getUrl()}/sessions`;
+const MILLISECONDS_IN_SECOND = 1000;
 
 @Injectable()
 export class AuthService {
@@ -21,13 +23,13 @@ export class AuthService {
     private storageService: StorageService
   ) {}
 
-  public login(loginForm: LoginForm): Observable<object> {
+  public login(loginForm: LoginForm): Observable<string> {
     const loginData = this.hashPassword(loginForm);
     return this.http.post(SESSIONS_URL, loginData).pipe(
       switchMap((res: LoginResponse) => {
         this.storageService.store('token', res.token);
         this.storageService.store('refreshToken', res.refreshToken);
-        return of({});
+        return of(res.token);
       })
     );
   }
@@ -35,6 +37,28 @@ export class AuthService {
   public register(registerForm: RegisterForm): Observable<object> {
     const loginData = this.hashPassword(registerForm);
     return this.http.post(USERS_URL, loginData);
+  }
+
+  public isTokenValid(): boolean {
+    const token = this.storageService.get('token');
+    const decodedJwt = jwtDecode(token) as {exp: number};
+    return (new Date()).getTime() / MILLISECONDS_IN_SECOND < decodedJwt.exp;
+  }
+
+  public logOut() {
+
+  }
+
+  public refreshToken(): Observable<string> {
+    const refreshToken = this.storageService.get('refreshToken');
+    return this.http.put(`${SESSIONS_URL}/refresh`, {refreshToken})
+      .pipe(
+        switchMap((res: LoginResponse) => {
+          this.storageService.store('token', res.token);
+          this.storageService.store('refreshToken', res.refreshToken);
+          return of(res.token);
+        })
+      );
   }
 
   private hashPassword(form: LoginForm | RegisterForm) {

@@ -3,13 +3,17 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/com
 import {Observable, throwError} from 'rxjs';
 import {StorageService} from './storage.service';
 import {Router} from '@angular/router';
-import {catchError} from 'rxjs/operators';
+import {catchError, finalize, switchMap} from 'rxjs/operators';
+import {AuthService} from './auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
+  private isRefreshTokenRequest = false;
+
   constructor(
     private storageService: StorageService,
+    private authService: AuthService,
     private router: Router
   ) {}
 
@@ -22,16 +26,27 @@ export class AuthInterceptor implements HttpInterceptor {
         }
       });
     }
-
     return next.handle(req).pipe(
       catchError((failure, caught) => {
-        if (failure.status === 401) {
-          // ToDo: implement refreshing token
-          this.storageService.clear();
-          this.router.navigate(['/auth']);
+        if (failure.status === 401 && !this.isRefreshTokenRequest) {
+          this.isRefreshTokenRequest = true;
+          return this.authService.refreshToken()
+            .pipe(
+              switchMap(() => next.handle(req)),
+              catchError((err) => {
+                this.logOut();
+                return throwError(err);
+              }),
+              finalize(() => this.isRefreshTokenRequest = false)
+            );
         }
         return throwError(failure);
       })
     );
+  }
+
+  private logOut() {
+    this.storageService.clear();
+    this.router.navigate(['/auth']);
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {createRegisterForm} from './register.form';
-import {AuthService} from '../auth.service';
+import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {switchMap} from 'rxjs/operators';
 import {LoginForm} from '../models/login-form';

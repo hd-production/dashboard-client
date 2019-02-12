@@ -5,8 +5,6 @@ import {DashboardComponent} from './dashboard.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { ProjectsListComponent } from './components/projects/projects-list/projects-list.component';
 import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {AuthInterceptor} from '../services/auth.interceptor';
 
 @NgModule({
   imports: [
