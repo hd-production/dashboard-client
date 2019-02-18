@@ -7,18 +7,24 @@ import {StorageService} from './storage.service';
 export class AuthGuardService implements CanActivate, CanLoad {
 
   constructor(
-    private storageService: StorageService
+    private storageService: StorageService,
+    private router: Router
   ) {}
 
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
-    return this._isAuthorized();
+    return this.isAuthorized();
   }
 
   public canLoad(route: Route): boolean | Observable<boolean> | Promise<boolean> {
-    return this._isAuthorized();
+    return this.isAuthorized();
   }
 
-  private _isAuthorized(): boolean | Observable<boolean> | Promise<boolean> {
+  private isAuthorized(): boolean | Observable<boolean> | Promise<boolean> {
+    const token = this.storageService.get('token');
+    if (!token) {
+      this.router.navigate(['auth']);
+      return false;
+    }
     return true;
   }
 }

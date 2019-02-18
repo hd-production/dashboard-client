@@ -45,10 +45,6 @@ export class AuthService {
     return (new Date()).getTime() / MILLISECONDS_IN_SECOND < decodedJwt.exp;
   }
 
-  public logOut() {
-
-  }
-
   public refreshToken(): Observable<string> {
     const refreshToken = this.storageService.get('refreshToken');
     return this.http.put(`${SESSIONS_URL}/refresh`, {refreshToken})

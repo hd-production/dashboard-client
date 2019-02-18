@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../services/user.service';
 import {AuthService} from '../services/auth.service';
+import {AddProjectComponent} from './components/projects/add-project/add-project.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +13,9 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private dialog: MatDialog
+
   ) { }
 
   ngOnInit() {
@@ -22,7 +26,10 @@ export class DashboardComponent implements OnInit {
       .subscribe(user => console.log(user));
   }
 
-  public testJwt(): void {
-    console.log(this.authService.isTokenValid());
+  public addProject(): void {
+    const dialogRef = this.dialog.open(AddProjectComponent);
+    dialogRef.afterClosed().subscribe(() => {
+      console.log('closed');
+    });
   }
 }
