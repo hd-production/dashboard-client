@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
-import { ProjectsListDataSource } from './projects-list-datasource';
+import {ProjectsService} from '../../../services/projects.service';
+import {ProjectsListDataSource} from './projects-list-datasource';
 
 @Component({
   selector: 'app-projects-list',
@@ -12,10 +13,13 @@ export class ProjectsListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   dataSource: ProjectsListDataSource;
 
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
+  constructor(
+    private projectService: ProjectsService
+  ) {}
+
   displayedColumns = ['id', 'name'];
 
   ngOnInit() {
-    this.dataSource = new ProjectsListDataSource(this.paginator, this.sort);
+    this.dataSource = new ProjectsListDataSource(this.paginator, this.sort, this.projectService);
   }
 }

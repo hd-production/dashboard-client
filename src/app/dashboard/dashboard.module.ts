@@ -2,10 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {DashboardRoutingModule} from './dashboard-routing.module';
 import {DashboardComponent} from './dashboard.component';
-import { ProjectsComponent } from './components/projects/projects.component';
 import { ProjectsListComponent } from './components/projects/projects-list/projects-list.component';
-import {MatTableModule, MatPaginatorModule, MatSortModule, MatDialogModule} from '@angular/material';
+import {
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatDialogModule,
+  MatCardModule,
+  MatFormFieldModule,
+  MatInputModule
+} from '@angular/material';
 import { AddProjectComponent } from './components/projects/add-project/add-project.component';
+import {ProjectsService} from './services/projects.service';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -14,16 +23,23 @@ import { AddProjectComponent } from './components/projects/add-project/add-proje
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   declarations: [
     DashboardComponent,
-    ProjectsComponent,
     ProjectsListComponent,
     AddProjectComponent
   ],
   entryComponents: [
     AddProjectComponent
+  ],
+  providers: [
+    ProjectsService
   ]
+
 })
 export class DashboardModule { }
