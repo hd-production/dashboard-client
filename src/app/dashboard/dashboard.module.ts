@@ -17,6 +17,7 @@ import { AddProjectComponent } from './components/projects/add-project/add-proje
 import {ProjectsService} from './services/projects.service';
 import {ReactiveFormsModule} from '@angular/forms';
 import { ProjectsComponent } from './components/projects/projects.component';
+import { SettingsComponent } from './components/projects/settings/settings.component';
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ import { ProjectsComponent } from './components/projects/projects.component';
     DashboardComponent,
     ProjectsListComponent,
     AddProjectComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    SettingsComponent
   ],
   entryComponents: [
     AddProjectComponent
