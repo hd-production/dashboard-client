@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort } from '@angular/material';
-import {ProjectsService} from '../../../services/projects.service';
+import {Component, Input, OnInit} from '@angular/core';
 import {ProjectsListDataSource} from './projects-list-datasource';
+import {Observable} from 'rxjs';
+import {Project} from '../../../models/project';
 
 @Component({
   selector: 'app-projects-list',
@@ -9,17 +9,15 @@ import {ProjectsListDataSource} from './projects-list-datasource';
   styleUrls: ['./projects-list.component.css']
 })
 export class ProjectsListComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
   dataSource: ProjectsListDataSource;
+  @Input()
+  public projectsObservable: Observable<Project[]>;
 
-  constructor(
-    private projectService: ProjectsService
-  ) {}
+  constructor() {}
 
   displayedColumns = ['id', 'name'];
 
   ngOnInit() {
-    this.dataSource = new ProjectsListDataSource(this.paginator, this.sort, this.projectService);
+    this.dataSource = new ProjectsListDataSource(this.projectsObservable);
   }
 }

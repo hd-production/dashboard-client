@@ -1,8 +1,6 @@
 import { DataSource } from '@angular/cdk/collections';
-import { MatPaginator, MatSort } from '@angular/material';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import {ProjectsService} from '../../../services/projects.service';
+import {Observable, of} from 'rxjs';
 import {Project} from '../../../models/project';
 import {Injectable} from '@angular/core';
 
@@ -16,16 +14,13 @@ export interface ProjectListItem {
 export class ProjectsListDataSource extends DataSource<ProjectListItem> {
 
   constructor(
-    private paginator: MatPaginator,
-    private sort: MatSort,
-    private projectsService: ProjectsService
+    private projectsEmitter: Observable<Project[]>
   ) {
     super();
   }
 
   public connect(): Observable<ProjectListItem[]> {
-    return this.projectsService
-      .find()
+    return this.projectsEmitter
       .pipe(
         map((projects: Project[]) => {
           return projects.map(project => this.mapToListItem(project));
