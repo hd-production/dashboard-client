@@ -1,4 +1,6 @@
-<a routerLink="/auth">Login page</a>
-<button (click)="getUser()" >Get user</button>
-<button (click)="addProject()" >Add project</button>
-<app-projects-list></app-projects-list>
+<mat-toolbar>
+  <span>My application</span>
+  <a routerLink="/auth">Login page</a>
+  <button (click)="getUser()" >Get user</button>
+</mat-toolbar>
+<router-outlet></router-outlet>

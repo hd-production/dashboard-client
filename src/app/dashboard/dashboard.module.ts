@@ -10,11 +10,13 @@ import {
   MatDialogModule,
   MatCardModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  MatToolbarModule
 } from '@angular/material';
 import { AddProjectComponent } from './components/projects/add-project/add-project.component';
 import {ProjectsService} from './services/projects.service';
 import {ReactiveFormsModule} from '@angular/forms';
+import { ProjectsComponent } from './components/projects/projects.component';
 
 @NgModule({
   imports: [
@@ -27,12 +29,14 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatCardModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatToolbarModule
   ],
   declarations: [
     DashboardComponent,
     ProjectsListComponent,
-    AddProjectComponent
+    AddProjectComponent,
+    ProjectsComponent
   ],
   entryComponents: [
     AddProjectComponent

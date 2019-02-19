@@ -13,22 +13,22 @@ export class ProjectsService {
   ) {}
 
   public find(): Observable<Project[]> {
-    return this.http.get(PROJECT_URL);
+    return this.http.get(PROJECT_URL) as Observable<Project[]>;
   }
 
   public get(id: number): Observable<Project> {
-    return this.http.get(`${PROJECT_URL}/${id}`);
+    return this.http.get(`${PROJECT_URL}/${id}`) as Observable<Project>;
   }
 
   public create(project: Project): Observable<Project> {
-    return this.http.post(PROJECT_URL, project);
+    return this.http.post(PROJECT_URL, project) as Observable<Project>;
   }
 
   public update(id: number, project: Project): Observable<Project> {
-    return this.http.put(`${PROJECT_URL}/${id}`, project);
+    return this.http.put(`${PROJECT_URL}/${id}`, project) as Observable<Project>;
   }
 
-  public remove(id: number): Observable<void> {
-    return this.http.delete(`${PROJECT_URL}/${id}`);
+  public remove(id: number): Observable<unknown> {
+    return this.http.delete(`${PROJECT_URL}/${id}`) as Observable<unknown>;
   }
 }
