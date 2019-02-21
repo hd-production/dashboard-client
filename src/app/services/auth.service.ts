@@ -24,7 +24,7 @@ export class AuthService {
   ) {}
 
   public login(loginForm: LoginForm): Observable<string> {
-    const loginData = AuthService.hashPassword(loginForm);
+    const loginData = this.hashPassword(loginForm);
     return this.http.post(SESSIONS_URL, loginData).pipe(
       switchMap((res: LoginResponse) => {
         this.storageService.store('token', res.token);
@@ -35,7 +35,7 @@ export class AuthService {
   }
 
   public register(registerForm: RegisterForm): Observable<object> {
-    const loginData = AuthService.hashPassword(registerForm);
+    const loginData = this.hashPassword(registerForm);
     return this.http.post(USERS_URL, loginData);
   }
 
@@ -57,7 +57,7 @@ export class AuthService {
       );
   }
 
-  private static hashPassword(form: LoginForm | RegisterForm) {
+  private hashPassword(form: LoginForm | RegisterForm) {
     return {
       ...form,
       password: undefined,
