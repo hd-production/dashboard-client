@@ -8,6 +8,8 @@ import {UserService} from '../services/user.service';
 })
 export class DashboardComponent implements OnInit {
 
+  public displayPlugin = false;
+
   constructor(
     private userService: UserService,
   ) { }
@@ -18,5 +20,9 @@ export class DashboardComponent implements OnInit {
   public getUser(): void {
     this.userService.getCurrentUser()
       .subscribe(user => console.log(user));
+  }
+
+  toggle() {
+    this.displayPlugin = !this.displayPlugin;
   }
 }

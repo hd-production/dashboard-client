@@ -4,3 +4,7 @@
   <button (click)="getUser()" >Get user</button>
 </mat-toolbar>
 <router-outlet></router-outlet>
+<br/>
+
+<button (click)="toggle()">Create ticket</button>
+<iframe *ngIf="displayPlugin" src="http://localhost:3000/"></iframe>

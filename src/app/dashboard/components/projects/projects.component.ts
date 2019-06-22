@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {AddProjectComponent} from './add-project/add-project.component';
 import {MatDialog} from '@angular/material';
 import {ProjectsService} from '../../services/projects.service';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {switchMap, tap} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {switchMap} from 'rxjs/operators';
 import {Project} from '../../models/project';
 
 @Component({

@@ -24,6 +24,10 @@ export class ProjectsService {
     return this.http.post(PROJECT_URL, project) as Observable<Project>;
   }
 
+  public runProject(id: number) {
+    return this.http.put(`${PROJECT_URL}/${id}/run`, {}) as Observable<Project>;
+  }
+
   public update(id: number, project: Project): Observable<Project> {
     return this.http.put(`${PROJECT_URL}/${id}`, project) as Observable<Project>;
   }

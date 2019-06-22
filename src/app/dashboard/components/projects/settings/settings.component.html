@@ -1,4 +1,16 @@
-<button mat-raised-button color="primary" (click)="inviteUser()">Send</button>
+{{project?.name}}
+<div>
+  Enter default admin data:
+  <input type="text" [(ngModel)]="project?.defaultAdminSettings.email">
+  <input type="text" [(ngModel)]="project?.defaultAdminSettings.firstName">
+  <input type="text" [(ngModel)]="project?.defaultAdminSettings.lastName">
+</div>
+<div>
+  Select app modules:
+  ADD HERE CHECKBOXES!
+</div>
 
+Get FE script for ticket creation:
+<button (click)="getPluginScript()">Get script</button>
 
-<a *ngIf="downloadLink" href="{{downloadLink}}}">Link to download</a>
+<button (click)="runApp()">Run application</button>

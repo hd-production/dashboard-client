@@ -15,9 +15,11 @@ import {
 } from '@angular/material';
 import { AddProjectComponent } from './components/projects/add-project/add-project.component';
 import {ProjectsService} from './services/projects.service';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { SettingsComponent } from './components/projects/settings/settings.component';
+import { RunAppDialogComponent } from './components/projects/settings/run-app-dialog/run-app-dialog.component';
+import { GetPluginScriptDialogComponent } from './components/projects/settings/get-plugin-script-dialog/get-plugin-script-dialog.component';
 
 @NgModule({
   imports: [
@@ -31,20 +33,25 @@ import { SettingsComponent } from './components/projects/settings/settings.compo
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatToolbarModule
+    MatToolbarModule,
+    FormsModule,
   ],
   declarations: [
     DashboardComponent,
     ProjectsListComponent,
     AddProjectComponent,
     ProjectsComponent,
-    SettingsComponent
+    SettingsComponent,
+    RunAppDialogComponent,
+    GetPluginScriptDialogComponent,
   ],
   entryComponents: [
-    AddProjectComponent
+    AddProjectComponent,
+    GetPluginScriptDialogComponent,
+    RunAppDialogComponent,
   ],
   providers: [
-    ProjectsService
+    ProjectsService,
   ]
 
 })
