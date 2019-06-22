@@ -7,9 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
+  public downloadLink = null;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  build() {
+    // this.inviteUserService.invite({
+    //   email: this.userEmail,
+    //   firstName: this.firstName,
+    //   lastName: this.lastName,
+    //   role: this.role
+    // }).subscribe(() => {
+    //   console.log('user invited ');
+    // });
+  }
 }
