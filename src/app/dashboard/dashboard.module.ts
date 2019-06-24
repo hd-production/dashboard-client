@@ -11,7 +11,7 @@ import {
   MatCardModule,
   MatFormFieldModule,
   MatInputModule,
-  MatToolbarModule
+  MatToolbarModule, MatIconModule, MatRadioModule
 } from '@angular/material';
 import { AddProjectComponent } from './components/projects/add-project/add-project.component';
 import {ProjectsService} from './services/projects.service';
@@ -35,6 +35,8 @@ import { GetPluginScriptDialogComponent } from './components/projects/settings/g
     MatInputModule,
     MatToolbarModule,
     FormsModule,
+    MatIconModule,
+    MatRadioModule,
   ],
   declarations: [
     DashboardComponent,

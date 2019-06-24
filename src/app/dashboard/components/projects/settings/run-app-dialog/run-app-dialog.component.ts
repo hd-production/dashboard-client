@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {DeploymentType} from '../deployment-type.enum';
+import {MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-run-app-dialog',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RunAppDialogComponent implements OnInit {
 
-  constructor() { }
+  public cloudValue = DeploymentType.CLOUD;
+  public selfHostValue = DeploymentType.SELF_HOST;
+
+  public selectedDeploymentType: keyof DeploymentType;
+
+  constructor(
+    private dialog: MatDialogRef<RunAppDialogComponent>
+  ) { }
 
   ngOnInit() {
+  }
+
+  public submit() {
+    this.dialog.close(this.selectedDeploymentType);
   }
 
 }

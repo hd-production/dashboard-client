@@ -35,4 +35,8 @@ export class ProjectsService {
   public remove(id: number): Observable<unknown> {
     return this.http.delete(`${PROJECT_URL}/${id}`) as Observable<unknown>;
   }
+
+  public downloadProject() {
+    return this.http.get('file:///Users/aboho/Desktop/test.zip');
+  }
 }

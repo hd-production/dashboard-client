@@ -18,11 +18,9 @@
         <div class="horizontal-container align-right">
           <button mat-raised-button color="primary" (click)="submit()">Submit</button>
         </div>
-      </mat-card-actions>
-      <mat-card-actions>
-        <div class="horizontal-container align-right">
-          <button mat-raised-button color="primary" (click)="toRegister()">Go to registration</button>
-        </div>
+        <span class="navigation-text">
+          If you want to register, click <a routerLink="/auth/register">here</a>
+        </span>
       </mat-card-actions>
     </mat-card>
   </div>

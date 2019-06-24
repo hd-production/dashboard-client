@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../services/user.service';
+import {User} from './models/user';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,21 +10,27 @@ import {UserService} from '../services/user.service';
 })
 export class DashboardComponent implements OnInit {
 
+  public user: User;
   public displayPlugin = false;
 
   constructor(
     private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit() {
-  }
-
-  public getUser(): void {
     this.userService.getCurrentUser()
-      .subscribe(user => console.log(user));
+      .subscribe(user => {
+        this.user = user;
+      });
   }
 
   toggle() {
     this.displayPlugin = !this.displayPlugin;
+  }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['auth/login']);
   }
 }

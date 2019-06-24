@@ -1,3 +1,17 @@
-Here should be two options with different behavior:
-run in cloud
-get self-host build
+<mat-card>
+  <mat-card-title>
+    Select deployment type:
+  </mat-card-title>
+  <mat-card-content>
+    <mat-radio-group [(ngModel)]="selectedDeploymentType" aria-label="Select an option">
+      <mat-radio-button [value]="cloudValue">Run in the cloud</mat-radio-button>
+      <mat-radio-button [value]="selfHostValue">Get self-host app</mat-radio-button>
+    </mat-radio-group>
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="horizontal-container align-right">
+      <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+    </div>
+  </mat-card-actions>
+</mat-card>
+

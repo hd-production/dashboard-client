@@ -1,7 +1,11 @@
 <mat-toolbar>
-  <span>My application</span>
-  <a routerLink="/auth">Login page</a>
-  <button (click)="getUser()" >Get user</button>
+  <div class="header">
+    <span>HD-dashboard</span>
+    <div>
+      {{user?.firstName}} {{user?.lastName}}
+      <mat-icon (click)="logout()">exit_to_app</mat-icon>
+    </div>
+  </div>
 </mat-toolbar>
 <router-outlet></router-outlet>
 <br/>
